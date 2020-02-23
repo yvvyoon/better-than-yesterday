@@ -1,7 +1,10 @@
+import os
 import telegram
+from dotenv import load_dotenv
 
+load_dotenv(verbose=True)
 
-TELEGRAM_TOKEN = 'Nope'
+TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
 
 bot = telegram.Bot(token=TELEGRAM_TOKEN)
 updates = bot.get_updates()
@@ -12,5 +15,5 @@ longitude = 127.037126
 bot.send_message(chat_id=chat_id, text='파스타프ㅏ스타파스타')
 # bot.send_location(chat_id=chat_id, latitude=latitude, longitude=longitude)
 
-for update in updates:
-    print(update.message)
+# for update in updates:
+#     print(update.message)
