@@ -1,16 +1,21 @@
 import os
 import requests
+import json
+
 from dotenv import load_dotenv
 
 load_dotenv(verbose=True)
 
-LOCATION_API_KEY = os.getenv('LOCATION_API_KEY')
+API_KEY = os.getenv('LOCATION_API_KEY')
+API_URL = f'https://www.googleapis.com/geolocation/v1/geolocate?key={API_KEY}'
 
-url = f'https://www.googleapis.com/geolocation/v1/geolocate?key={LOCATION_API_KEY}'
-data = {
+request_data = {
     'considerIp': True,
 }
 
-result = requests.post(url, data)
+api_call_result = requests.post(url=API_URL, data=request_data)
+location_data = json.loads(api_call_result.text)
+latitude = location_data['location']['lat']
+longitude = location_data['location']['lng']
 
-print(result.text)
+# print(latitude, longitude)
